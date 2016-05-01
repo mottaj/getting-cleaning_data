@@ -77,14 +77,14 @@ All data processing steps that were performed for the training set were repeated
 ### Merge the training and test data sets into a single combined data set
 `combined_data <- bind_rows(train, test)`
 
-### Extracts only the measurements on the mean and standard deviation for each measurement.
+### Extracts only the measurements on the mean and standard deviation for each measurement
 I accomplished this by selecting only the columns whose names contain "-mean()" or "-std()". I found it necessary to use `grep()` on the feature names obtained earlier from the file `UCI HAR Dataset/features.txt` to obtain a list of columns to select. If I instead tried to use, for example, `contains("-mean()")` within `select()` I found that no columns were selected. This is because the feature names contain characters like "-" and "()" which are not allowed as column/variable names in R; thus R converted these characters to "." when assinging the 561 feature names from features.txt to column names.
 
-#### 66 columns left in the reduced data set
-There were 33 columns whose names contained "-mean()" and 33 columns whose names contained "-std()".
+#### 68 columns left in the reduced data set
+There were 33 columns whose names contained "-mean()" and 33 columns whose names contained "-std()". So I kept those 66 columns plus the columns for activity and subject.
 
 ### Calculate averages of each variable for each activity and subject
-Accomplished using `dplyr`'s `group_by()` function to group the data by activity and subject. Then used the `summarize_each()` function to calculate the average (mean) of each of the 66 columns for each activity-subject pair. This resulted in a new data set with 68 columns (activity, subject, and 66 variables containing the averages) and 180 rows (6 activities x 30 subjects = 180).
+Accomplished using `dplyr`'s `group_by()` function to group the data by activity and subject. Then used the `summarize_each()` function to calculate the average (mean) of each of the 66 columns for each activity-subject pair. This resulted in a new data set with 68 columns (activity, subject, and 66 more columns containing the averages) and 180 rows (6 activities x 30 subjects = 180).
 
 #### Output file
-`averages.txt` is a data file with 68 columns and 1 header row followed by 180 data rows.
+My script `run_analysis.R` produces the output file `averages.txt`, which is a data file with 68 columns and 1 header row followed by 180 data rows. Can be read into R using `read.table("averages.txt", header = TRUE)`.
