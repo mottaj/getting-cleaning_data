@@ -28,6 +28,24 @@ Thirty individuals labeled 1 through 30. The subjects for the 7,352 rows of the 
 #### Activities
 
 Six possible physical activities that were performed by the subjects. The activities are denoted by numbers 1 through 6. The activities for the 7,352 rows of the training set are given as a column vector in the file `train/y_train.txt`. The activities for the 2,947 rows of the test set are given as a column vector in the file `test/y_test.txt`.
+
+## My script ``run_analysis.R`` - what does it do?
+
+### Reads names for the 561 columns
+from the file `UCI HAR Dataset/features.txt`. Here are the first few rows:
+```
+1 tBodyAcc-mean()-X
+2 tBodyAcc-mean()-Y
+3 tBodyAcc-mean()-Z
+4 tBodyAcc-std()-X
+5 tBodyAcc-std()-Y
+6 tBodyAcc-std()-Z
+...
+```
+It is necessary to read the column names from this `features.txt` file because the files `X_train.txt` and `X_test.txt` do not have column headings.
+
+### Reads names of the six activities
+from the file `UCI HAR Dataset/activity_labels.txt`:
 ```
 1 WALKING
 2 WALKING_UPSTAIRS
@@ -36,3 +54,37 @@ Six possible physical activities that were performed by the subjects. The activi
 5 STANDING
 6 LAYING
 ```
+
+### Reads the training data set
+
+#### Assigns the column names obtained earlier
+from the file `UCI HAR Dataset/features.txt`:
+`read.table("X_train.txt", col.names = features)`
+
+#### Reads subjects
+from the file `UCI HAR Dataset/train/subject_train.txt`
+
+#### Reads activities & converts from numbers 1-6 to descriptive labels
+Reads activities from the file `UCI HAR Dataset/train/y_train.txt`. Converts activities vector from an integer 1-6 to the text labels "WALKING", "WALKING-UPSTAIRS", etc. that were obtained earlier from the file `UCI HAR Dataset/activity_labels.txt`. This is accomplished by converting the activities vector into a factor:
+`factor(y_train_df$activity, levels = activity_levels, labels = activity_labels)`
+
+#### Make a data table containing the original 561 columns plus two new columns
+The two columns added were subject and activity, as these were originally stored separately. The addition of these two columns was accomplished using the `mutate` function of the `dplyr` package.
+
+### Reads the test data set
+All data processing steps that were performed for the training set were repeated for the test set.
+
+### Merge the training and test data sets into a single combined data set
+`combined_data <- bind_rows(train, test)`
+
+### Extracts only the measurements on the mean and standard deviation for each measurement.
+I accomplished this by selecting only the columns whose names contain "-mean()" or "-std()". I found it necessary to use `grep()` on the feature names obtained earlier from the file `UCI HAR Dataset/features.txt` to obtain a list of columns to select. If I instead tried to use, for example, `contains("-mean()")` within `select()` I found that no columns were selected. This is because the feature names contain characters like "-" and "()" which are not allowed as column/variable names in R; thus R converted these characters to "." when assinging the 561 feature names from features.txt to column names.
+
+#### 66 columns left in the reduced data set
+There were 33 columns whose names contained "-mean()" and 33 columns whose names contained "-std()".
+
+### Calculate averages of each variable for each activity and subject
+Accomplished using `dplyr`'s `group_by()` function to group the data by activity and subject. Then used the `summarize_each()` function to calculate the average (mean) of each of the 66 columns for each activity-subject pair. This resulted in a new data set with 68 columns (activity, subject, and 66 variables containing the averages) and 180 rows (6 activities x 30 subjects = 180).
+
+#### Output file
+`averages.txt` is a data file with 68 columns and 1 header row followed by 180 data rows.
