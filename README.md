@@ -58,14 +58,13 @@ from the file `UCI HAR Dataset/activity_labels.txt`:
 ### Reads the training data set
 
 #### Assigns the column names obtained earlier
-from the file `UCI HAR Dataset/features.txt`:
 `read.table("X_train.txt", col.names = features)`
 
 #### Reads subjects
-from the file `UCI HAR Dataset/train/subject_train.txt`
+from the file `train/subject_train.txt`
 
 #### Reads activities & converts from numbers 1-6 to descriptive labels
-Reads activities from the file `UCI HAR Dataset/train/y_train.txt`. Converts activities vector from an integer 1-6 to the text labels "WALKING", "WALKING-UPSTAIRS", etc. that were obtained earlier from the file `UCI HAR Dataset/activity_labels.txt`. This is accomplished by converting the activities vector into a factor:
+Reads activities from the file `train/y_train.txt`. Converts activities vector from an integer 1-6 to the text labels "WALKING", "WALKING-UPSTAIRS", etc. that were obtained earlier. This is accomplished by converting the activities vector into a factor:
 `factor(y_train_df$activity, levels = activity_levels, labels = activity_labels)`
 
 #### Make a data table containing the original 561 columns plus two new columns
@@ -78,10 +77,10 @@ All data processing steps that were performed for the training set were repeated
 `combined_data <- bind_rows(train, test)`
 
 ### Extracts only the measurements on the mean and standard deviation for each measurement
-I accomplished this by selecting only the columns whose names contain "-mean()" or "-std()". I found it necessary to use `grep()` on the feature names obtained earlier from the file `UCI HAR Dataset/features.txt` to obtain a list of columns to select. If I instead tried to use, for example, `contains("-mean()")` within `select()` I found that no columns were selected. This is because the feature names contain characters like "-" and "()" which are not allowed as column/variable names in R; thus R converted these characters to "." when assinging the 561 feature names from features.txt to column names.
+I accomplished this by selecting only the columns whose names contain "-mean()" or "-std()". I found it necessary to use `grep()` on the feature names obtained earlier from the file `features.txt` to obtain a list of columns to select. If I instead tried to use, for example, `contains("-mean()")` within `select()` I found that no columns were selected. This is because the feature names contain characters like `-` and `()` which are not allowed as column/variable names in R; thus R converted these characters to "." when assinging the 561 feature names from features.txt to column names.
 
 #### 68 columns left in the reduced data set
-There were 33 columns whose names contained "-mean()" and 33 columns whose names contained "-std()". So I kept those 66 columns plus the columns for activity and subject. Here are the first few column names:
+There were 33 columns whose names contained `-mean()` and 33 columns whose names contained `-std()`. So I kept those 66 columns plus the columns for activity and subject. Here are the first few column names:
 ```
 activity
 subject
@@ -93,7 +92,7 @@ tBodyAcc.std...Y
 tBodyAcc.std...Z
 ...
 ```
-Note that in `features.txt` the original names were `tBodyAcc-mean()-X`, etc., but R has automatically converted "-", "(", and ")" into dots to create valid column names.
+Note that in `features.txt` the original names were `tBodyAcc-mean()-X`, etc., but R has automatically converted `-` and `()` into dots to create valid column names.
 
 ### Calculate averages of each variable for each activity and subject
 Accomplished using `dplyr`'s `group_by()` function to group the data by activity and subject. Then used the `summarize_each()` function to calculate the average (mean) of each of the 66 columns for each activity-subject pair. This resulted in a new data set with 68 columns (activity, subject, and 66 more columns containing the averages) and 180 rows (6 activities x 30 subjects = 180).
