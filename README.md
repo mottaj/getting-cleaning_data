@@ -19,7 +19,7 @@ I found I needed to include `method = "curl"` as a parameter to `download.file()
 
 ### Brief description of source data
 
-The source data set contains 561 columns (i.e., variables or "features"); these are quantities that were calculated from the accelerometer and gyroscope data recorded by smartphones worn by 30 individuals ("subjects"). Rather than having one large data set, the data was split into two groups, a training set and a test set, with the training set having data from a randomly chosen 70% (21) of the subjects and the test set having data from the other 30% (9) of the subjects. These two data sets are stored within the `train` and `test` subfolders of `UCI HAR Dataset`. The training set (`train/X_train.txt`) contains 7,352 rows of data, and the test set (`train/X_train.txt`) contains 2,947 rows of data. Each row of data corresponds to a single observation of a single subject peforming a single activity.
+The source data set contains 561 columns (i.e., variables or "features"); these are quantities that were calculated from the accelerometer and gyroscope data recorded by smartphones worn by 30 individuals ("subjects"). Rather than having one large data set, the data was split into two groups, a training set and a test set, with the training set having data from a randomly chosen 70% (21) of the subjects and the test set having data from the other 30% (9) of the subjects. These two data sets are stored within the `train` and `test` subfolders of `UCI HAR Dataset`. The training set (`train/X_train.txt`) contains 7,352 rows of data, and the test set (`test/X_test.txt`) contains 2,947 rows of data. Each row of data corresponds to a single observation of a single subject peforming a single activity.
 
 #### Subjects
 
