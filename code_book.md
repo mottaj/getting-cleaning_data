@@ -74,7 +74,7 @@ Note that when you tell R to use the names above as column names, it removes the
 
 The data have been grouped by activity and subject and then averaged (mean) for each activity-subject pair.
 
-For example, column 3 is named `tBodyAcc-mean()-X`. This column name refers to accelerometer data (Acc) for the subject's body movement (Body) in the time domain (t) for the X direction that has been averaged (mean) over the 128 time samples in each 2.56 sec observation window in the source data set. In my data set in `averages.txt`, I have then averaged the values of `tBodyAcc-mean()-X` for the activity `WALKING` and for subject 1, and similarly for every unique combination of the six activities and 30 subjects. In effect, my data set `averages.txt` contains columns for means of means, and columns for means of standard deviations.
+For example, column 3 is named `tBodyAcc-mean()-X`. This column name refers to accelerometer data (Acc) for the subject's body movement (Body) in the time domain (t) for the X direction that has been averaged (mean) over the 128 time samples in each 2.56 sec observation window in the source data set. To construct my data set in `averages.txt`, I have then averaged the values of `tBodyAcc-mean()-X` for the activity `WALKING` and for subject 1, and similarly for every unique combination of the six activities and 30 subjects. In effect, my data set `averages.txt` contains columns for means of means, and columns for means of standard deviations.
 
 The source data set comes with the code book `features_info.txt` which describes its variables and their names. Below is an excerpt of the relevant part:
 
