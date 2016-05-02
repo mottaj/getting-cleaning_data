@@ -98,4 +98,4 @@ Note that in `features.txt` the original names were `tBodyAcc-mean()-X`, etc., b
 Accomplished using `dplyr`'s `group_by()` function to group the data by activity and subject. Then used the `summarize_each()` function to calculate the average (mean) of each of the 66 columns for each activity-subject pair. This resulted in a new data set with 68 columns (activity, subject, and 66 more columns containing the averages) and 180 rows (6 activities x 30 subjects = 180).
 
 #### Output file
-My script `run_analysis.R` produces the output file `averages.txt`, which is a data file with 68 columns and 1 header row followed by 180 data rows. Can be read into R using `read.table("averages.txt", header = TRUE)`.
+My script `run_analysis.R` produces the output file `averages.txt`, which is a data file with 68 columns and 1 header row followed by 180 data rows. Can be read into R using `read.table("averages.txt", header = TRUE)`. Refer to `code_book.md` for more details on the output data set.
