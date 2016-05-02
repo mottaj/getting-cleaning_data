@@ -77,7 +77,7 @@ All data processing steps that were performed for the training set were repeated
 `combined_data <- bind_rows(train, test)`
 
 ### Extracts only the measurements on the mean and standard deviation for each measurement
-I accomplished this by selecting only the columns whose names contain `-mean()` or `-std()`. I found it necessary to use `grep()` on the feature names obtained earlier from the file `features.txt` to obtain a list of columns to select. If I instead tried to use, for example, `contains("-mean()")` within `select()` I found that no columns were selected. This is because the feature names contain characters like `-` and `()` which are not allowed as column/variable names in R; thus R converted these characters to "." when assinging the 561 feature names from features.txt to column names.
+I accomplished this by selecting only the columns whose names contain `-mean()` or `-std()`. I found it necessary to use `grep()` on the feature names obtained earlier from the file `features.txt` to obtain a list of columns to select. If I instead tried to use, for example, `contains("-mean()")` within `select()` I found that no columns were selected. This is because the feature names contain characters like `-` and `()` which are not allowed as column/variable names in R; thus R converted these characters to `.` when assinging the 561 feature names from features.txt to column names.
 
 #### 68 columns left in the reduced data set
 There were 33 columns whose names contained `-mean()` and 33 columns whose names contained `-std()`. So I kept those 66 columns plus the columns for activity and subject. Here are the first few column names:
