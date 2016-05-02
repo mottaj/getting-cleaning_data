@@ -1,4 +1,4 @@
-`averages.txt` contains tidy/cleaned/summarized data derived from the source data set (see README.md). Data table in `averages.txt` contains the following 68 columns:
+`averages.txt` contains tidy/cleaned/summarized data derived from the source data set (see `README.md`). Data table in `averages.txt` contains the following 68 columns:
 
 1. activity
 2. subject
