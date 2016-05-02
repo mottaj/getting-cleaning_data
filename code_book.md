@@ -1,5 +1,5 @@
 `averages.txt` contains tidy/cleaned/summarized data derived from the source data set (see `README.md`). Data table in `averages.txt` contains the following 68 columns:
-
+```
 1. activity
 2. subject
 3. tBodyAcc.mean...X
@@ -68,8 +68,9 @@
 66. fBodyBodyGyroMag.std..
 67. fBodyBodyGyroJerkMag.mean..
 68. fBodyBodyGyroJerkMag.std..
+```
 
-Note that originally the variable names had "()" instead of "..", and "-" instead of "."; R converted disallowed characters to dots in order to create valid column names.
+Note that originally the variable names had `()` instead of `..`, and `-` instead of `.`; R converted disallowed characters to dots in order to create valid column names.
 
 The data have been grouped by activity and subject and then averaged (mean) for each activity-subject pair.
 
