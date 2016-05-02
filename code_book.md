@@ -1,4 +1,4 @@
-Data set in averages.txt contains the following 68 columns:
+`averages.txt` contains tidy/cleaned/summarized data derived from the source data set (see README.md). Data table in `averages.txt` contains the following 68 columns:
 
 1. activity
 2. subject
@@ -69,4 +69,42 @@ Data set in averages.txt contains the following 68 columns:
 67. fBodyBodyGyroJerkMag.mean..
 68. fBodyBodyGyroJerkMag.std..
 
+Note that originally the variable names had "()" instead of "..", and "-" instead of "."; R converted disallowed characters to dots in order to create valid column names.
+
 The data have been grouped by activity and subject and then averaged (mean) for each activity-subject pair.
+
+For example, column 3 is named "tBodyAcc.mean...X". This column name refers to accelerometer data (Acc) for the subject's body movement (Body) in the time domain (t) for the X direction that has been averaged (mean) over the 128 time samples in each 2.56 sec window in the source data set. In my data set in `averages.txt`, I have then averaged the values of "tBodyAcc.mean...X" for the activity "WALKING" and for subject 1, and similarly for every unique combination of the six activities and 30 subjects. In effect, my data set `averages.txt` contains columns for means of means, and for means of standard deviations.
+
+The source data set comes with the code book `features_info.txt` describes its variables and their names. Below is an excerpt of the relevant part:
+
+>The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+>
+>Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+>
+>Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+>
+>These signals were used to estimate variables of the feature vector for each pattern:
+>'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+>
+>- tBodyAcc-XYZ
+>- tGravityAcc-XYZ
+>- tBodyAccJerk-XYZ
+>- tBodyGyro-XYZ
+>- tBodyGyroJerk-XYZ
+>- tBodyAccMag
+>- tGravityAccMag
+>- tBodyAccJerkMag
+>- tBodyGyroMag
+>- tBodyGyroJerkMag
+>- fBodyAcc-XYZ
+>- fBodyAccJerk-XYZ
+>- fBodyGyro-XYZ
+>- fBodyAccMag
+>- fBodyAccJerkMag
+>- fBodyGyroMag
+>- fBodyGyroJerkMag
+>
+>The set of variables that were estimated from these signals are: 
+>
+>- mean(): Mean value
+>- std(): Standard deviation
